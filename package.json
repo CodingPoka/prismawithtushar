@@ -1,7 +1,7 @@
 {
   "name": "prismawithtushar",
   "version": "1.0.0",
-  
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -21,6 +21,7 @@
   "description": "",
   "dependencies": {
     "express": "^5.2.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "prisma": "^7.7.0"
   }
 }
