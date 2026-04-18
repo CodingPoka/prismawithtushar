@@ -20,6 +20,7 @@
   "homepage": "https://github.com/CodingPoka/prismawithtushar#readme",
   "description": "",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.7.0",
     "express": "^5.2.1",
     "nodemon": "^3.1.14",
