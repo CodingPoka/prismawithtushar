@@ -1,20 +1,52 @@
-
-
-
-
-generator client{
+generator client {
   provider = "prisma-client-js"
 }
 
-datasource db{
+datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String?
+  //one user can have many posts
+  post Post[]
+  //relationshipt with comment
+  comment Comment[]
+  createdAt DateTime @default(now())
+}
 
-model User{
+
+//relationships with post and user
+
+model Post{
   id Int @id @default(autoincrement())
-  name String?
-  email String @unique
-  password String?
+
+  //use onDelete cascade to delete all the posts of a user when the user is deleted
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  //relation with comment model
+  comment Comment[]
+  title String
+  description String
+  commentCount Int @default(0)
+  createdAt DateTime @default(now())
+}
+
+//relationshipt with post and comment
+
+model Comment{
+  id String @id @default(uuid())
+
+  //if a post is deleted then all the comments of that post will be deleted
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+  //if a user is deleted then all the comments of that user will be deleted
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  comment String
   createdAt DateTime @default(now())
 }
